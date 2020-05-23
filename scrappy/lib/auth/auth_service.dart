@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'package:scrappy/models/license/license.dart';
 import 'package:scrappy/scrappy_const.dart';
+import 'package:scrappy/settings/settings_service.dart';
+
+import '../scrappy_const.dart';
 
 enum AccessLevel {
   public,
@@ -40,20 +44,22 @@ class AuthService{
 
   static Future<String> getAuthUserName() async {
     //todo recupero da server
-    String adminUsername = SettingsService.data.adminNickname ?? 'admin';
+    String adminUsername = SettingsService.data.adminNickname ?? +'admin';
     return adminUsername;
   }
 
   static Future<void> setAuthUserName(String newValue) async {
+    //mmmmmmmmmmmmmmmmmmmmmmmm fa un pò cagare.... non dovrebbe esse in locale
     SettingsService.data.adminNickname = newValue;
-    //se posso fare questa operazione ero già admin, forse voglio rimanerlo?
-    await Storage<String>(Constants.boxUsername).unshiftAsync(newValue);
+
+    //se posso fare questa operazione ero già admin, forse voglio rimanerlo?!
+    await Storage<String>(ScrappyContstants.boxUsername).unshiftAsync(newValue);
     await SettingsService.sendData(SettingsService.data);
   }
 
   static Future<void> init() async {
     AccessLevel ac = AccessLevel.public;
-    String username = await Storage<String>(Constants.boxUsername).firstAsync() ?? '';
+    String username = await Storage<String>(ScrappyContstants.boxUsername).firstAsync() ?? '';
     String adminUserName = await AuthService.getAuthUserName();
     if(username != '')
       ac = AccessLevel.waiter;

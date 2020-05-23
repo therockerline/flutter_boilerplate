@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:scrappy/scrappy_const.dart';
 
+import '../scrappy_const.dart';
 import 'network_service.dart';
 
 class TokenService {

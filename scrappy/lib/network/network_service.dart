@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:scrappy/network/token_service.dart';
 
+import '../auth/auth_service.dart';
+import '../scrappy_const.dart';
 import '../scrappy_const.dart';
 
 class NetworkService {
@@ -74,9 +76,9 @@ class NetworkService {
     }catch(e){
       return null;
     }
-    int millis = DateTime.now().difference(start).inMilliseconds;
+    /*int millis = DateTime.now().difference(start).inMilliseconds;
     String stringMillis = repeatCharInHead(str: "${millis}",char: ' ', strLength: 6);
-    /*if(url == Environment.apiUrl) {
+    if(url == Environment.apiUrl) {
       NetworkService.stat.add(millis);
       double media = NetworkService.stat.reduce((val, elem) => val + elem) / NetworkService.stat.length;
       print(media);
@@ -84,7 +86,7 @@ class NetworkService {
     //print([start,"await $stringMillis","statusCode ${response.statusCode}",uri, data.toString()]);
     //gestione errori
     switch(response.statusCode) {
-      case Constants.invalidToken: //invalid token
+      case ScrappyContstants.invalidToken: //invalid token
         return await _request(method: method,
             data: data,
             context: context,

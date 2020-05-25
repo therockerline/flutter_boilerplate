@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:scrappy/models/license/license.dart';
 import 'package:scrappy/scrappy_const.dart';
 import 'package:scrappy/settings/settings_service.dart';
+import 'package:scrappy/storage/storage_service.dart';
 
 import '../scrappy_const.dart';
 
@@ -44,7 +45,7 @@ class AuthService{
 
   static Future<String> getAuthUserName() async {
     //todo recupero da server
-    String adminUsername = SettingsService.data.adminNickname ?? +'admin';
+    String adminUsername = SettingsService.data.adminNickname ?? 'admin';
     return adminUsername;
   }
 
@@ -53,13 +54,13 @@ class AuthService{
     SettingsService.data.adminNickname = newValue;
 
     //se posso fare questa operazione ero già admin, forse voglio rimanerlo?!
-    await Storage<String>(ScrappyContstants.boxUsername).unshiftAsync(newValue);
+    Storage<String>(ScrappyContstants.boxUsername).value = newValue;
     await SettingsService.sendData(SettingsService.data);
   }
 
   static Future<void> init() async {
     AccessLevel ac = AccessLevel.public;
-    String username = await Storage<String>(ScrappyContstants.boxUsername).firstAsync() ?? '';
+    String username = Storage<String>(ScrappyContstants.boxUsername).value ?? '';
     String adminUserName = await AuthService.getAuthUserName();
     if(username != '')
       ac = AccessLevel.waiter;
@@ -69,10 +70,11 @@ class AuthService{
   }
 
   static String getFirstRouteByRole() {
+    throw('not implemented');
     switch(AuthService.currentUser.accessLevel){
       case AccessLevel.public:
-      case AccessLevel.waiter: return MyCatalog.routeName;
-      case AccessLevel.cashier: return HomePage.routeName;
+      case AccessLevel.waiter:
+      case AccessLevel.cashier: return '';
     }
   }
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:myPWA/pages/main_loader/components/loading_page.dart';
-import 'package:myPWA/services/route_service.dart';
+import 'file:///C:/Users/loren/AndroidStudioProjects/myPWA/scrappy/lib/services/route_service.dart';
 import 'package:myPWA/src/theme/scrappy_theme.dart';
+import 'package:scrappy/components/pages/main_loader/components/loading_page.dart';
 
 void main() {
   runApp(MyApp());

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:scrappy/auth/auth_service.dart';
 import 'package:scrappy/network/token_service.dart';
 
 import '../auth/auth_service.dart';

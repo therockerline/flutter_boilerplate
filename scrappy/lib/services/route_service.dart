@@ -9,12 +9,12 @@ class RouteService{
 
   static void add(String routeName){
     history.add(routeName);
-    print(history);
+    //print(history);
   }
 
   static void remove(String pageName) {
     history.remove(pageName);
-    print(history);
+    //print(history);
   }
 
 }
